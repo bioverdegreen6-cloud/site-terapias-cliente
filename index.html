@@ -1497,6 +1497,7 @@
             scroll-behavior: smooth;
         }
     </style>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -1621,11 +1622,7 @@
                     <h2 class="section-title">Therapies Available</h2>
                     <p class="section-text" style="margin: 0 auto;">Discover our range of holistic treatments designed to support your wellness journey</p>
                 </div>
-                <div class="therapies-grid">
-                    <div class="therapy-card" onclick="showPage('massage')">
-                        <div class="therapy-card-image">
-                            <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80" alt="Massage">
-                            <div class="therapy-card-icon">🤲</div>
+                <div class="therapies-grid"><!-- Injetado dinamicamente via JS --></div>
                         </div>
                         <div class="therapy-card-content">
                             <h3>Deep Tissue & Swedish Massage</h3>
@@ -1635,7 +1632,7 @@
                     </div>
                     <div class="therapy-card" onclick="showPage('reflexology')">
                         <div class="therapy-card-image">
-                            <img src="assets/rosani-reflexology.jpg" alt="Reflexology">
+                            <img src="rosani-reflexology.jpg" alt="Reflexology">
                             <div class="therapy-card-icon">🦶</div>
                         </div>
                         <div class="therapy-card-content">
@@ -1657,7 +1654,7 @@
                     </div>
                     <div class="therapy-card" onclick="showPage('acupuncture')">
                         <div class="therapy-card-image">
-                            <img src="assets/rosani-auricular-acupuncture.png" alt="Auricular Acupuncture">
+                            <img src="rosani-auricular-acupuncture.png" alt="Auricular Acupuncture">
                             <div class="therapy-card-icon">👂</div>
                         </div>
                         <div class="therapy-card-content">
@@ -1679,7 +1676,7 @@
                     </div>
                     <div class="therapy-card" onclick="showPage('cupping')">
                         <div class="therapy-card-image">
-                            <img src="assets/rosani-copping2.png" alt="Cupping">
+                            <img src="rosani-copping2.png" alt="Cupping">
                             <div class="therapy-card-icon">⭕</div>
                         </div>
                         <div class="therapy-card-content">
@@ -1753,11 +1750,7 @@
         </section>
         <section class="therapies-section">
             <div class="container">
-                <div class="therapies-grid">
-                    <div class="therapy-card" onclick="showPage('massage')">
-                        <div class="therapy-card-image">
-                            <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80" alt="Massage">
-                            <div class="therapy-card-icon">🤲</div>
+                <div class="therapies-grid"><!-- Injetado dinamicamente via JS --></div>
                         </div>
                         <div class="therapy-card-content">
                             <h3>Deep Tissue & Swedish Massage</h3>
@@ -1767,7 +1760,7 @@
                     </div>
                     <div class="therapy-card" onclick="showPage('reflexology')">
                         <div class="therapy-card-image">
-                            <img src="assets/rosani-reflexology.jpg" alt="Reflexology">
+                            <img src="rosani-reflexology.jpg" alt="Reflexology">
                             <div class="therapy-card-icon">🦶</div>
                         </div>
                         <div class="therapy-card-content">
@@ -1789,7 +1782,7 @@
                     </div>
                     <div class="therapy-card" onclick="showPage('acupuncture')">
                         <div class="therapy-card-image">
-                            <img src="assets/rosani-auricular-acupuncture.png" alt="Auricular Acupuncture">
+                            <img src="rosani-auricular-acupuncture.png" alt="Auricular Acupuncture">
                             <div class="therapy-card-icon">👂</div>
                         </div>
                         <div class="therapy-card-content">
@@ -1811,7 +1804,7 @@
                     </div>
                     <div class="therapy-card" onclick="showPage('cupping')">
                         <div class="therapy-card-image">
-                            <img src="assets/rosani-copping2.png" alt="Cupping">
+                            <img src="rosani-copping2.png" alt="Cupping">
                             <div class="therapy-card-icon">⭕</div>
                         </div>
                         <div class="therapy-card-content">
@@ -1826,318 +1819,12 @@
     </div>
 
     <!-- MASSAGE PAGE -->
-    <div class="page" id="page-massage">
-        <section class="therapy-hero">
-            <div class="therapy-hero-bg">
-                <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=1920&q=80" alt="Massage therapy">
-            </div>
-            <div class="therapy-hero-overlay"></div>
-            <div class="therapy-hero-content">
-                <span class="therapy-hero-badge">Massage Therapy</span>
-                <h1>Deep Tissue & Swedish Massage</h1>
-                <p>A healing modality used for thousands of years to bring balance and relief to the body</p>
-                 <button class="btn-primary" onclick="showPage('book')">Book Your Treatment →</button>
-            </div>
-        </section>
-        <section class="therapy-content">
-            <div class="container">
-                <a class="back-link" onclick="showPage('therapies')">← Back to Therapies</a>
-                
-                <div class="therapy-section">
-                    <h2>A Healing Tradition</h2>
-                    <p>Massage has been a healing modality in various cultures around the world for thousands of years. This hands-on therapy promotes better health, bringing more oxygen and nutrients to the muscles and organs of the body.</p>
-                    <p>Whether you're looking for support with aches/pain with a deep tissue massage or a Swedish massage that promotes more relaxation, this is the therapy for you.</p>
-                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80" alt="Massage therapy">
-                </div>
-
-                <div class="benefits-box">
-                    <h3>Benefits</h3>
-                    <div class="benefits-grid">
-                        <div class="benefit-item"><span class="check">✓</span> <span>Relieves muscle pain and tension</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Improves circulation</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Reduces stress and anxiety</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Promotes relaxation</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Increases flexibility</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Improves sleep quality</span></div>
-                    </div>
-                </div>
-
-                <div class="therapy-cta">
-                    <button 
-  class="btn-primary" 
-  onclick="showPage('book')" 
-  style="background-color:#6DBE45; color:white;">
-  Book Your Appointment →
-</button>
-
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- REFLEXOLOGY PAGE -->
-    <div class="page" id="page-reflexology">
-        <section class="therapy-hero">
-            <div class="therapy-hero-bg">
-                <img src="assets/rosani-reflexology.jpg" alt="Reflexology">
-            </div>
-            <div class="therapy-hero-overlay"></div>
-            <div class="therapy-hero-content">
-                <span class="therapy-hero-badge">Foot & Facial</span>
-                <h1>Reflexology</h1>
-                <p>Ancient healing techniques that treat the whole body through reflex points</p>
-                <button class="btn-primary" onclick="showPage('book')">Book Your Treatment →</button>
-            </div>
-        </section>
-        <section class="therapy-content">
-            <div class="container">
-                <a class="back-link" onclick="showPage('therapies')">← Back to Therapies</a>
-                
-                <div class="therapy-section">
-                    <h2>Foot Reflexology</h2>
-                    <p>During this treatment, various points of the feet, called reflexes, are stimulated to help support the entire body. The feet are seen as a sort of mirror to the rest of the body.</p>
-                    <img src="assets/rosani-reflexology2.png" alt="Foot reflexology">
-                </div>
-
-                <div class="benefits-box">
-                    <h3>Benefits</h3>
-                    <div class="benefits-grid">
-                        <div class="benefit-item"><span class="check">✓</span> <span>Promotes deep relaxation</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Improves circulation</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Supports the immune system</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Relieves tension and stress</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Improves sleep quality</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Supports natural healing</span></div>
-                    </div>
-                </div>
-
-                <div class="therapy-cta">
-                    <button 
-  class="btn-primary" 
-  onclick="showPage('book')" 
-  style="background-color:#6DBE45; color:white;">
-  Book Your Appointment →
-</button>
-
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- FACIAL REFLEXOLOGY PAGE -->
-    <div class="page" id="page-facial">
-        <section class="therapy-hero">
-            <div class="therapy-hero-bg">
-                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1920&q=80" alt="Facial Reflexology">
-            </div>
-            <div class="therapy-hero-overlay"></div>
-            <div class="therapy-hero-content">
-                <span class="therapy-hero-badge">Natural Facelift</span>
-                <h1>Facial Reflexology</h1>
-                <p>Supporting circulation and lymphatic drainage for radiant, balanced skin</p>
-                <button class="btn-primary" onclick="showPage('book')">Book Your Treatment →</button>
-            </div>
-        </section>
-        <section class="therapy-content">
-            <div class="container">
-                <a class="back-link" onclick="showPage('therapies')">← Back to Therapies</a>
-                
-                <div class="therapy-section">
-                    <h2>Reflexology Facelift</h2>
-                    <p>Support circulation, lymphatic drainage and bring balance to the face with this gentle treatment. Multiple techniques are utilised during the treatment, including facial cups, gua sha, jade roller and acupen.</p>
-                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80" alt="Facial reflexology">
-                </div>
-
-                <div class="benefits-box">
-                    <h3>Benefits</h3>
-                    <div class="benefits-grid">
-                        <div class="benefit-item"><span class="check">✓</span> <span>Supports circulation</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Lymphatic drainage</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Reduces puffiness</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Tones facial muscles</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Natural healthy glow</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Deeply relaxing</span></div>
-                    </div>
-                </div>
-
-                <div class="therapy-cta">
-                    <button 
-  class="btn-primary" 
-  onclick="showPage('book')" 
-  style="background-color:#6DBE45; color:white;">
-  Book Your Appointment →
-</button>
- 
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- INDIAN HEAD MASSAGE PAGE -->
-    <div class="page" id="page-indian-head">
-        <section class="therapy-hero">
-            <div class="therapy-hero-bg">
-                <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=1920&q=80" alt="Indian Head Massage">
-            </div>
-            <div class="therapy-hero-overlay"></div>
-            <div class="therapy-hero-content">
-                <span class="therapy-hero-badge">Ayurvedic Therapy</span>
-                <h1>Indian Head Massage</h1>
-                <p>A subtle energy therapy focusing on traditional marma points for deep relaxation</p>
-                <button class="btn-primary" onclick="showPage('book')">Book Your Treatment →</button>
-            </div>
-        </section>
-        <section class="therapy-content">
-            <div class="container">
-                <a class="back-link" onclick="showPage('therapies')">← Back to Therapies</a>
-                
-                <div class="therapy-section">
-                    <h2>The Art of Ayurvedic Healing</h2>
-                    <p>Indian head massage is a subtle energy therapy which focuses on the traditional marma points, based in the Indian practice of Ayurveda.</p>
-                    <p>By stimulating the various marma points on the head, face, neck and shoulders, we bring balance to the physical and energetic body.</p>
-                    <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=800&q=80" alt="Indian head massage">
-                </div>
-
-                <div class="benefits-box">
-                    <h3>Benefits</h3>
-                    <div class="benefits-grid">
-                        <div class="benefit-item"><span class="check">✓</span> <span>Relieves tension headaches</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Reduces stress and anxiety</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Improves concentration</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Promotes better sleep</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Stimulates hair growth</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Balances energy flow</span></div>
-                    </div>
-                </div>
-
-                <div class="info-note">
-                    <h3>Important Information</h3>
-                    <p>Warm oil is applied during this treatment, particularly to the scalp and hair. We recommend planning to go home directly after your treatment.</p>
-                </div>
-
-                <div class="therapy-cta">
-                    <button 
-  class="btn-primary" 
-  onclick="showPage('book')" 
-  style="background-color:#6DBE45; color:white;">
-  Book Your Appointment →
-</button>
-
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- AURICULAR ACUPUNCTURE PAGE -->
-    <div class="page" id="page-acupuncture">
-        <section class="therapy-hero">
-            <div class="therapy-hero-bg">
-                <img src="assets/rosani-auricular-acupuncture.png" alt="Auricular Acupuncture">
-            </div>
-            <div class="therapy-hero-overlay"></div>
-            <div class="therapy-hero-content">
-                <span class="therapy-hero-badge">NADA Protocol</span>
-                <h1>Auricular Acupuncture</h1>
-                <p>A powerful ear acupuncture protocol supporting recovery, detox, and mental wellness</p>
-                <button class="btn-primary" onclick="showPage('book')">Book Your Treatment →</button>
-            </div>
-        </section>
-        <section class="therapy-content">
-            <div class="container">
-                <a class="back-link" onclick="showPage('therapies')">← Back to Therapies</a>
-                
-                <div class="therapy-section">
-                    <h2>The NADA Protocol</h2>
-                    <p>The NADA protocol, also known as the five point protocol, is a series of five acupuncture points on both ears. These points are known to help with recovery, detox and mental health issues—e.g., anxiety and low mood.</p>
-                    <p>Five needles will be placed in each ear and they will remain there for approximately 45 minutes.</p>
-                    <img src="assets/rosani-auricular-acupuncture2.png" alt="Auricular acupuncture">
-                </div>
-
-                <div class="benefits-box">
-                    <h3>Benefits</h3>
-                    <div class="benefits-grid">
-                        <div class="benefit-item"><span class="check">✓</span> <span>Supports addiction recovery</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Helps with detoxification</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Reduces anxiety</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Improves mood</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Promotes relaxation</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Aids in better sleep</span></div>
-                    </div>
-                </div>
-
-                <div class="info-note">
-                    <h3>Afraid of Needles?</h3>
-                    <p>For those who are afraid or unsure of using needles, there is another option—ear seeds or pellets. These are placed on the same points without piercing the skin and remain for 2-7 days.</p>
-                </div>
-
-                <div class="therapy-cta">
-                    <button 
-  class="btn-primary" 
-  onclick="showPage('book')" 
-  style="background-color:#6DBE45; color:white;">
-  Book Your Appointment →
-</button>
-
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- CUPPING PAGE -->
-    <div class="page" id="page-cupping">
-        <section class="therapy-hero">
-            <div class="therapy-hero-bg">
-                <img src="assets/rosani-copping2.png" alt="Cupping">
-            </div>
-            <div class="therapy-hero-overlay"></div>
-            <div class="therapy-hero-content">
-                <span class="therapy-hero-badge">Traditional Therapy</span>
-                <h1>Cupping</h1>
-                <p>An ancient healing method to increase blood flow and promote muscle relaxation</p>
-                <button class="btn-primary" onclick="showPage('book')">Book Your Treatment →</button>
-            </div>
-        </section>
-        <section class="therapy-content">
-            <div class="container">
-                <a class="back-link" onclick="showPage('therapies')">← Back to Therapies</a>
-                
-                <div class="therapy-section">
-                    <h2>Ancient Healing Method</h2>
-                    <p>Cupping is an ancient healing method that is often combined with forms of massage. Blood flow to the treated area is increased when the cups are suctioned to the skin, promoting muscle relaxation.</p>
-                    <img src="assets/rosani-copping.jpg" alt="Cupping therapy">
-                </div>
-
-                <div class="benefits-box">
-                    <h3>Benefits</h3>
-                    <div class="benefits-grid">
-                        <div class="benefit-item"><span class="check">✓</span> <span>Increases blood flow</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Promotes muscle relaxation</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Helps ease pain</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Reduces inflammation</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Releases toxins</span></div>
-                        <div class="benefit-item"><span class="check">✓</span> <span>Improves range of motion</span></div>
-                    </div>
-                </div>
-
-                <div class="info-note">
-                    <h3>Important Information</h3>
-                    <p>Cupping marks are normal and expected. Marks typically last 2-7 days and will fade naturally.</p>
-                </div>
-
-                <div class="therapy-cta">
-                    <button 
-  class="btn-primary" 
-  onclick="showPage('book')" 
-  style="background-color:#6DBE45; color:white;">
-  Book Your Appointment →
-</button>
-
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- ABOUT PAGE -->
+    
+    
+    
+    
+    
+    
     <div class="page" id="page-about">
         <section class="therapy-hero">
             <div class="therapy-hero-bg">
@@ -2155,7 +1842,7 @@
             <div class="container">
                 <div class="about-grid">
                     <div class="about-image">
-                        <img src="assets/roseni-about.png" alt="Roséni - Holistic Therapist">
+                        <img src="roseni-about.png" alt="Roséni - Holistic Therapist">
                         <div class="about-years">
                             <div class="location-card-icon">❤️</div>
                             <div class="location-card-text">
@@ -2492,5 +2179,19 @@
             }
         });
     </script>
-</body>
+
+    <!-- Scripts dinâmicos para Decap CMS -->
+    <script src="/js/cms-services.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+    </body>
 </html>
