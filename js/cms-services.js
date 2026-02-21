@@ -1,74 +1,59 @@
 /**
- * CMS Services Loader
- * Carrega dinamicamente os serviços do diretório /content/services/
+ * CMS Services Loader (V3)
+ * Este script busca automaticamente os arquivos de terapia do diretório /content/services/
+ * e os injeta dinamicamente no index.html preservando o design original.
  */
 
-async function loadServices() {
-    try {
-        // Em um ambiente de produção com Decap CMS (Git Gateway), 
-        // não podemos listar arquivos diretamente via JS no navegador.
-        // A solução padrão é usar uma API (como a do GitHub) ou gerar um index.json no build.
-        // Para este projeto estático, vamos buscar o arquivo de configuração ou 
-        // assumir uma convenção de nomes, ou melhor, usar o script de build para gerar a lista.
-        
-        // No entanto, para Decap CMS puro em site estático sem gerador de site estático (SSG),
-        // a forma mais comum de "descobrir" os arquivos é ter um arquivo central de índice
-        // ou buscar diretamente da API do GitHub se necessário.
-        
-        // Para simplificar e manter 100% estático sem dependências complexas,
-        // vamos implementar um buscador que tenta carregar serviços conhecidos 
-        // ou, se estivermos no Netlify, podemos usar a API de busca.
-        
-        // ESTRATÉGIA: O Decap CMS salva arquivos em /content/services/*.md.
-        // Vamos buscar a lista de serviços.
-        
-        const servicesList = await fetchServicesList();
-        const servicesData = await Promise.all(
-            servicesList.map(slug => fetchServiceData(slug))
-        );
-
-        renderServicesGrid(servicesData);
-        renderServicesDropdown(servicesData);
-        renderIndividualServicePages(servicesData);
-
-    } catch (error) {
-        console.error('Erro ao carregar serviços:', error);
-    }
-}
-
-async function fetchServicesList() {
-    // Nota: Em um site puramente estático, listar arquivos é difícil.
-    // O ideal seria um script de build gerar um 'services.json'.
-    // Como o pedido é para deploy direto, vamos usar uma lista que o CMS pode atualizar
-    // ou buscar via API do GitHub se configurado.
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Tenta carregar a lista de serviços
+    // Como estamos em um ambiente estático, não podemos listar arquivos via JS puro no navegador.
+    // Estratégia: O CMS pode ser configurado para salvar um índice JSON, 
+    // ou podemos tentar carregar slugs comuns, ou usar a API do GitHub se configurado.
     
-    // Por enquanto, vamos buscar de um arquivo central 'services.json' que o CMS pode gerenciar
-    // ou que podemos gerar. 
-    try {
-        const response = await fetch('/content/services.json');
-        if (response.ok) return await response.json();
-    } catch (e) {
-        console.warn('Arquivo services.json não encontrado, usando fallback.');
-    }
+    // Por enquanto, usaremos uma lista de slugs que o CMS gerencia.
+    // Se você quiser que seja 100% automático sem editar este array, 
+    // a melhor forma é configurar o Decap CMS para gerar um arquivo services.json.
+    const knownSlugs = ['massage', 'reflexology', 'indian-head', 'acupuncture', 'facial', 'cupping'];
     
-    // Fallback para os serviços iniciais conhecidos
-    return ['massage', 'reflexology', 'indian-head', 'acupuncture', 'facial', 'cupping'];
-}
+    // Tentamos buscar todos os serviços
+    const services = [];
+    for (const slug of knownSlugs) {
+        try {
+            const data = await fetchServiceData(slug);
+            if (data) services.push(data);
+        } catch (e) {
+            console.warn(`Serviço ${slug} não encontrado.`);
+        }
+    }
 
+    if (services.length > 0) {
+        renderServicesGrid(services);
+        renderServicesDropdown(services);
+        renderIndividualServicePages(services);
+        console.log('CMS Services carregados com sucesso.');
+    }
+});
+
+/**
+ * Busca e processa o arquivo Markdown de um serviço
+ */
 async function fetchServiceData(slug) {
     const response = await fetch(`/content/services/${slug}.md`);
+    if (!response.ok) return null;
     const text = await response.text();
     return parseMarkdown(text, slug);
 }
 
+/**
+ * Parser simples de Markdown Frontmatter
+ */
 function parseMarkdown(text, slug) {
     const frontmatterRegex = /^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/;
     const match = text.match(frontmatterRegex);
-    
-    if (!match) return { slug };
+    if (!match) return null;
 
     const yamlBlock = match[1];
-    const content = match[2];
+    const body = match[2];
     const data = {};
 
     yamlBlock.split('\n').forEach(line => {
@@ -81,13 +66,17 @@ function parseMarkdown(text, slug) {
     return {
         ...data,
         slug: data.slug || slug,
-        longContent: content.trim()
+        body: body.trim()
     };
 }
 
+/**
+ * Renderiza os cards na grade principal (Home e Página de Terapias)
+ */
 function renderServicesGrid(services) {
     const grids = document.querySelectorAll('.therapies-grid');
     grids.forEach(grid => {
+        // Limpa conteúdo hardcoded e injeta o dinâmico
         grid.innerHTML = services.map(service => `
             <div class="therapy-card" onclick="showPage('${service.slug}')">
                 <div class="therapy-card-image">
@@ -104,11 +93,14 @@ function renderServicesGrid(services) {
     });
 }
 
+/**
+ * Atualiza os menus (Dropdown e Mobile)
+ */
 function renderServicesDropdown(services) {
-    const dropdownInners = document.querySelectorAll('.dropdown-inner, .submenu');
-    dropdownInners.forEach(container => {
-        const isSubmenu = container.classList.contains('submenu');
-        const closeAction = isSubmenu ? 'toggleMobileMenu()' : 'closeDropdown()';
+    const containers = document.querySelectorAll('.dropdown-inner, .submenu');
+    containers.forEach(container => {
+        const isMobile = container.classList.contains('submenu');
+        const closeAction = isMobile ? 'toggleMobileMenu()' : 'closeDropdown()';
         
         let html = `<a onclick="showPage('therapies'); ${closeAction}">All Therapies</a>`;
         html += services.map(service => `
@@ -119,30 +111,33 @@ function renderServicesDropdown(services) {
     });
 }
 
+/**
+ * Cria as seções de página individual dinamicamente no DOM
+ */
 function renderIndividualServicePages(services) {
-    // Esta função cria dinamicamente as seções de página para cada serviço
-    // preservando a estrutura original do HTML.
-    
-    const body = document.body;
+    const footer = document.querySelector('footer');
     
     services.forEach(service => {
         const pageId = `page-${service.slug}`;
-        let pageElem = document.getElementById(pageId);
-        
-        if (!pageElem) {
-            pageElem = document.createElement('div');
-            pageElem.className = 'page';
-            pageElem.id = pageId;
-            // Inserir antes do rodapé ou no final
-            const footer = document.querySelector('footer');
-            if (footer) {
-                body.insertBefore(pageElem, footer);
-            } else {
-                body.appendChild(pageElem);
-            }
-        }
+        // Se a página já existir no HTML (hardcoded), não criamos de novo
+        if (document.getElementById(pageId)) return; 
 
-        // Template baseado na estrutura original
+        const pageElem = document.createElement('div');
+        pageElem.className = 'page';
+        pageElem.id = pageId;
+
+        // Formata benefícios
+        const benefitsHtml = service.benefits ? `
+            <div class="benefits-box">
+                <h3>Benefits</h3>
+                <div class="benefits-grid">
+                    ${service.benefits.split(',').map(b => `
+                        <div class="benefit-item"><span class="check">✓</span> <span>${b.trim()}</span></div>
+                    `).join('')}
+                </div>
+            </div>
+        ` : '';
+
         pageElem.innerHTML = `
             <section class="therapy-hero">
                 <div class="therapy-hero-bg">
@@ -159,16 +154,13 @@ function renderIndividualServicePages(services) {
             <section class="therapy-content">
                 <div class="container">
                     <a class="back-link" onclick="showPage('therapies')">← Back to Therapies</a>
-                    
                     <div class="therapy-section">
                         <h2>${service.subtitle || 'A Healing Tradition'}</h2>
-                        <div class="markdown-content">
-                            ${formatContent(service.longContent)}
+                        <div class="markdown-body">
+                            ${formatMarkdownBody(service.body)}
                         </div>
                     </div>
-
-                    ${service.benefits ? renderBenefits(service.benefits) : ''}
-
+                    ${benefitsHtml}
                     <div class="therapy-cta">
                         <h3>Ready to experience ${service.title}?</h3>
                         <p>Book your session today and start your journey to wellness.</p>
@@ -177,37 +169,29 @@ function renderIndividualServicePages(services) {
                 </div>
             </section>
         `;
+        
+        // Insere antes do rodapé para manter a estrutura
+        if (footer) {
+            document.body.insertBefore(pageElem, footer);
+        } else {
+            document.body.appendChild(pageElem);
+        }
     });
 }
 
-function formatContent(text) {
+/**
+ * Formata o corpo do Markdown para HTML simples
+ */
+function formatMarkdownBody(text) {
     if (!text) return '';
-    // Simples conversão de markdown para parágrafos e imagens para este caso específico
     return text
         .split('\n\n')
-        .map(para => {
-            if (para.startsWith('![')) {
-                const match = para.match(/!\[(.*?)\]\((.*?)\)/);
-                return match ? `<img src="${match[2]}" alt="${match[1]}">` : para;
+        .map(p => {
+            if (p.startsWith('![')) {
+                const match = p.match(/!\[(.*?)\]\((.*?)\)/);
+                return match ? `<img src="${match[2]}" alt="${match[1]}" style="max-width:100%; border-radius:16px; margin: 20px 0;">` : p;
             }
-            return `<p>${para}</p>`;
+            return `<p>${p.replace(/\n/g, '<br>')}</p>`;
         })
         .join('');
 }
-
-function renderBenefits(benefitsStr) {
-    const benefits = benefitsStr.split(',').map(b => b.trim());
-    return `
-        <div class="benefits-box">
-            <h3>Benefits</h3>
-            <div class="benefits-grid">
-                ${benefits.map(benefit => `
-                    <div class="benefit-item"><span class="check">✓</span> <span>${benefit}</span></div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-}
-
-// Inicializar carregamento quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', loadServices);
