@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "services"
+    label: "Terapias / Serviços"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Slug (URL)", name: "slug", widget: "string", hint: "ex: massagem-sueca" }
+      - { label: "Descrição Curta", name: "description", widget: "text" }
+      - { label: "Ícone (Emoji)", name: "icon", widget: "string", default: "🤲" }
+      - { label: "Imagem de Destaque", name: "image", widget: "image" }
+      - { label: "Subtítulo Interno", name: "subtitle", widget: "string", default: "A Healing Tradition" }
+      - { label: "Benefícios", name: "benefits", widget: "string", hint: "Separe por vírgulas, ex: Relaxamento, Alívio de dor, Circulação" }
+      - { label: "Conteúdo Detalhado", name: "body", widget: "markdown" }
